@@ -27,7 +27,7 @@ public class HomePage {
     @FindBy(linkText = ("Cucumber BDD with Selenium & Java"))
     private WebElement cucumberBDDWithSeleniumJava;
 
-    @FindBy(partialLinkText = ("Mastering Selectors"))
+    @FindBy(linkText = ("Mastering Selectors/Locators"))
     private WebElement masteringSelectorsLocators;
 
 

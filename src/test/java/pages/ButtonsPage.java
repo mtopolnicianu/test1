@@ -47,9 +47,9 @@ public class ButtonsPage {
     }
 
     //JavaScriptExecutor click() method
-    public void clickBtnTwo() throws Throwable {
+    public void clickBtnTwo() {
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("document.getElementById('btn_two').click()", buttonTwo);
+      //  js.executeScript("document.getElementById('btn_two').click()", buttonTwo);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", buttonTwo);
@@ -58,6 +58,7 @@ public class ButtonsPage {
 
     //Action Move & Click method
     public void clickBtnThree() throws Throwable {
+        Thread.sleep(3000);
         Actions action = new Actions (driver);
         action.click(buttonThree).build().perform();
     }

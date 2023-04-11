@@ -12,11 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoaderPage {
     private WebDriver driver;
 
-    @FindBy(xpath = "//a[@href ='loader.html']")
-    private WebElement loaderPage;
 
     @FindBy(xpath = "//a[@href='loader.html']")
     private WebElement menuButton1;
+
+    @FindBy(xpath = "//a[@href ='loader.html']")
+    private WebElement loaderPage;
 
 
     @FindBy(id = "//button[@id=\"loaderBtn\"]")
@@ -37,7 +38,7 @@ public class LoaderPage {
         System.out.println("Test");
     }
 
-    public void clickTheButton() throws InterruptedException {
+    public void clickTheButton() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", clickMeButton);
 

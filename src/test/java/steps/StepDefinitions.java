@@ -24,7 +24,6 @@ public class StepDefinitions {
     private ContactFormsPage contactFormsPage;
     private DropDownPage dropDownPage;
     private RadioButtonsPage radioButtonsPage;
-    private WebDriverWait wait;
 
     @Before
     public void before() {
@@ -37,7 +36,7 @@ public class StepDefinitions {
         contactFormsPage = PageFactory.initElements(driver, ContactFormsPage.class);
         dropDownPage = PageFactory.initElements(driver, DropDownPage.class);
         radioButtonsPage = PageFactory.initElements(driver, RadioButtonsPage.class);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
     }
@@ -55,6 +54,10 @@ public class StepDefinitions {
     @When("^I click the menu button$")
     public void clickMenu() throws Throwable {
         homePage.clickMenuButton();
+    }
+    @When("^I click the menu button$")
+    public void Menuclicked() throws Throwable {
+        loaderPage.clickMenuButton();
     }
 
     @And("^I click the home page link$")
@@ -75,6 +78,7 @@ public class StepDefinitions {
 
     @Then("^I should be redirected to the Selectors/Locator course page$")
     public void accessLink3() throws Throwable {
+        Thread.sleep(6000);
         homePage.clickAccessLink3();
     }
 
@@ -139,7 +143,7 @@ public class StepDefinitions {
 
     //Scenarios for dropDopwn page
     @Given("^the user access the ([^\"]*) page$")
-    public void linkMenu(String link) throws Throwable {
+    public void linkMenu(String link) {
         driver.get(link);
 
     }
