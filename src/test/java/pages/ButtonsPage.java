@@ -1,13 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.junit.Assert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class ButtonsPage extends BasePage {
 
@@ -27,6 +23,9 @@ public class ButtonsPage extends BasePage {
     @FindBy(css = "button#btn_three")
     private WebElement buttonThree;
 
+    private static final String THIRD_BUTTON_CONFIRMATION_MESSAGE = "You clicked the third button!";
+    private static final String SECOND_BUTTON_CONFIRMATION_MESSAGE = "You clicked the second button!";
+    private static final String FIRST_BUTTON_CONFIRMATION_MESSAGE = "You clicked the first button!";
 
     public ButtonsPage(WebDriver driver) {
         super(driver);
@@ -34,25 +33,25 @@ public class ButtonsPage extends BasePage {
 
 
     public void clickMenuButton() {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='#sidebar']")));
+        waitForElementToBeVisible(menuButton);
         menuButton.click();
         System.out.println("Test");
     }
 
-    public void clickLinkButtons() throws Throwable {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='buttons.html'])")));
+    public void clickLinkButtons() {
+        waitForElementToBeVisible(buttonLink);
         buttonLink.click();
 
     }
 
-    public void clickBtnOne() throws Throwable {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#btn_one")));
+    public void clickBtnOne() {
+        waitForElementToBeVisible(buttonOne);
         buttonOne.click();
     }
 
     //JavaScriptExecutor click() method
     public void clickBtnTwo() {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id=\"btn_two\"]")));
+        waitForElementToBeClickable(buttonTwo);
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
 //  js.executeScript("document.getElementById('btn_two').click()", buttonTwo);
 
@@ -63,10 +62,33 @@ public class ButtonsPage extends BasePage {
 
     //Action Move & Click method
     public void clickBtnThree() {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id=\"btn_three\"]")));
+        waitForElementToBeVisible(buttonThree);
         Actions action = new Actions(getDriver());
         action.click(buttonThree).build().perform();
     }
 
+    public void assertMessageAppeared() {
+        String confirmationMessage = getDriver().switchTo().alert().getText();
+        Assert.assertEquals("The confirmation message was not displayed!", THIRD_BUTTON_CONFIRMATION_MESSAGE, confirmationMessage);
+    }
 
+    public void assertMessageForButtonTwoAppeared() {
+        String confirmationMessageTwo = getDriver().switchTo().alert().getText();
+        Assert.assertEquals("The confirmation message was not displayed for button two!", SECOND_BUTTON_CONFIRMATION_MESSAGE, confirmationMessageTwo);
+    }
+
+    //example based on alert box
+    public void assertMessageForButtonOneAppeared() {
+        Alert alertBox = driver.switchTo().alert();
+        System.out.println("Alert Box :" + alertBox);
+        Assert.assertNotNull(alertBox);
+        System.out.println("Alert is displayed");
+    }
+    //example based on the text in the alert box
+//    public void assertMessageForButtonOneAppeared() {
+//        String confirmationMessageOne = getDriver().switchTo().alert().getText();
+//        Assert.assertEquals("The confirmation message was not displayed for button one!", FIRST_BUTTON_CONFIRMATION_MESSAGE, confirmationMessageOne);
+//
+//    }
 }
+

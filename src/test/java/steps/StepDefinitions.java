@@ -6,8 +6,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +28,7 @@ public class StepDefinitions {
     private ContactFormsPage contactFormsPage;
     private DropDownPage dropDownPage;
     private DropRadioButtonsPage dropRadioButtonsPage;
+    private TestStorePage testStorePage;
 
     @Before
     public void before() {
@@ -36,16 +41,16 @@ public class StepDefinitions {
         contactFormsPage = PageFactory.initElements(driver, ContactFormsPage.class);
         dropDownPage = PageFactory.initElements(driver, DropDownPage.class);
         dropRadioButtonsPage = PageFactory.initElements(driver, DropRadioButtonsPage.class);
+        testStorePage = PageFactory.initElements(driver, TestStorePage.class);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
     }
 
-//    @After
-//    public void after() {
-//        driver.quit();
-//    }
+    @After
+    public void after() {
+        driver.quit();
+    }
 
     @Given("I access the ([^\"]*) page$")
     public void accessPage(String link) {
@@ -53,69 +58,64 @@ public class StepDefinitions {
     }
 
     @When("^I click the menu button$")
-    public void clickMenu() throws Throwable {
+    public void clickMenu() {
         homePage.clickMenuButton();
     }
 
     @And("^I click the home page link$")
-    public void gotoPage() throws Throwable {
+    public void gotoPage() {
         homePage.clickHomeButtonMenu();
     }
 
     @Then("^I access the \"Selenium Webdriver & Java\" link$")
-    public void accessLink() throws Throwable {
+    public void accessLink() {
         homePage.clickAccessLink();
 
     }
 
     @Then("^I should be redirected to the Cucumber BDD with Selenium & Java examples$")
-    public void accessLink2() throws Throwable {
+    public void accessLink2() {
         homePage.clickAccessLink2();
 
     }
 
     @Then("^I should be redirected to the Selectors/Locator course page$")
-    public void accessLink3() throws Throwable {
-        Thread.sleep(6000);
+    public void accessLink3() {
         homePage.clickAccessLink3();
     }
 
-    @When("^I click the menu button1$")
-    public void menuButton1() throws Throwable {
-        loaderPage.clickMenuButton();
-        Thread.sleep(6000);
+    @And("^I select the loader option from menu$")
+    public void clickLoaderPageFromMenu (){
+        loaderPage.clickLoaderPage();
     }
-
-    @Then("^I click on the \"Click me\" button on the loader page$")
-    public void clickMeButton() throws Throwable {
+    @Then("^I click the \"Click me\" button$")
+    public void pressClickOnClickMeButton (){
         loaderPage.clickTheButton();
-
     }
-
 
     @When("^I click the Menu button2$")
-    public void clickMenuPrincipal() throws Throwable {
+    public void clickMenuPrincipal() {
         buttonsPage.clickMenuButton();
     }
 
     @And("^I choose the Buttons link from the menu list$")
-    public void gotoButtons() throws Throwable {
+    public void gotoButtons() {
         buttonsPage.clickLinkButtons();
     }
 
     @Then("^I click on the first button from button page$")
-    public void clickWebElementButton() throws Throwable {
+    public void clickWebElementButton() {
         buttonsPage.clickBtnOne();
     }
 
     @And("^I click on the 'Contact us from test' link from the menu list$")
-    public void clickContactForm() throws Throwable {
+    public void clickContactForm() {
         contactFormsPage.clickContactUsForm();
 
     }
 
     @And("^I fill with all the information in the contact form  page$")
-    public void enterDataofClient() throws Throwable {
+    public void enterDataOfClient() throws Throwable {
         contactFormsPage.enterNameField();
         contactFormsPage.enterLastNameField();
         contactFormsPage.enterEmailAddressField();
@@ -123,19 +123,18 @@ public class StepDefinitions {
     }
 
     @Then("^I click Submit the form$")
-    public void clickOnSubmitButton() throws Throwable {
+    public void clickOnSubmitButton() {
         contactFormsPage.pressSubmitButton();
 
     }
 
-
     @Then("^I click on the \"Button Two\" from button page$")
-    public void clickOnButtonTwo() throws Throwable {
+    public void clickOnButtonTwo() {
         buttonsPage.clickBtnTwo();
     }
 
     @Then("^I click on the Button Three from button page$")
-    public void clickOnButtonThree() throws Throwable {
+    public void clickOnButtonThree() {
         buttonsPage.clickBtnThree();
     }
 
@@ -147,26 +146,107 @@ public class StepDefinitions {
     }
 
     @When("^the user clicked on the menu button$")
-    public void clickMenuButton() throws Throwable {
+    public void clickMenuButton() throws InterruptedException {
         dropDownPage.clickDropDownPage();
     }
 
     @Then("^the user can choose one of the option from dropdown list$")
-    public void dropDownList() throws Throwable {
+    public void dropDownList() throws InterruptedException {
         dropDownPage.selectAnOption();
 
     }
 
     @Then("^the user clicked on the \"one\" radio button from Radio Buttons list$")
-    public void clickRadioButtonOne() throws Throwable {
-        Thread.sleep(3000);
-       dropDownPage.selectRadioButtonOne();
+    public void clickRadioButtonOne() {
+        dropDownPage.selectRadioButtonOne();
     }
 
     @Then("^the user clicked on the \"two\" radio button from Radio Buttons list$")
-    public void clickRadioButtonTwo() throws Throwable {
-        Thread.sleep(3000);
+    public void clickRadioButtonTwo() {
         dropDownPage.selectRadioButtonTwo();
+    }
+
+    @And("^I verify that the confirmation message appeared$")
+    public void iVerifyThatTheConfirmationMessageAppeared() {
+        buttonsPage.assertMessageAppeared();
+    }
+
+    @And("^I verify that the confirmation message for button two appeared$")
+    public void iVerifyThatTheConfirmationMessageForButtonTwoAppeared() {
+        buttonsPage.assertMessageForButtonTwoAppeared();
+    }
+
+    @And("^I verify that the confirmation message for button one appeared$")
+    public void iVerifyThatConfirmationMessageForButtonOneAppeared() {
+        buttonsPage.assertMessageForButtonOneAppeared();
+    }
+
+    @And("^I verify that I am redirected to the confirmation message for submitted form$")
+    public void verifyTheSubmittedConfirmationMessage() {
+        WebElement submittedButton = driver.findElement(By.xpath("//div[@id='main']/div[@class='inner']//h3[.='Thank you for your mail!']"));
+        Assert.assertEquals(true, submittedButton.isDisplayed());
+
+    }
+
+    @And("^I verify that the confirmation for loading completed appeared$")
+    public void verifyLoadingCompleteConfirmationMessage() {
+        loaderPage.assertLoadingCompleteAppeared();
+    }
+
+    @And("^I verify that I am redirected to the examples page$")
+    public void verifyTheExamplesPage() {
+        homePage.assertVerifyTheExamplesPage();
+
+    }
+
+    @And("^I verify that I am redirected to the Cucumber BDD with Selenium&Java examples page$")
+    public void verifyCucumberBddCoursePage() {
+        homePage.assertVerifyTheSeleniumCourses();
+    }
+
+    @And("^I verify that I am redirected to the Mastering Selectors/Locators page$")
+    public void verifySelectorsLocatorsPage() {
+        homePage.assertVerifyTheSelectorsLocatorsCourses();
+    }
+
+    @And("^I verify that the radio button one is selected after performing the action 'click'$")
+    public void verifyRadioButtonOneIsSelected() {
+        dropDownPage.assertRadioButtonOne();
+    }
+
+    @And("^I verify that the radio button two is selected after performing the action 'click'$")
+    public void verifyRadioButtonTwoIsSelected() {
+        dropDownPage.assertRadioButtonTwo();
+    }
+
+    @And("^I verify the selected option is displayed$")
+    public void verifyTheSelection() {
+        dropDownPage.assertDropDownMenu();
+    }
+
+    @Then("^I click to the testStore page$")
+    public void testStoreLink() throws InterruptedException {
+        testStorePage.clickTestStorePage();
+    }
+
+    @And("^I verify that the testStore page is it opened correctly$")
+    public void verifyTestStorePage() {
+        testStorePage.assertTestStorePage();
+    }
+
+    @And("^I select the hummingbird T-Shirt$")
+    public void tShirtSelected() {
+        testStorePage.selectHummingbirdTshirt();
+    }
+
+    @And("^I have added into my cart the t-shirt")
+    public void tShirtAdded() throws InterruptedException {
+        testStorePage.addHummingbirdTshirt();
+    }
+
+    @Then("^I verify the total product$")
+    public void verifyTheTotalPriceFromShoppingCart() throws InterruptedException {
+        testStorePage.assertShoppingCartTotal();
     }
 }
 

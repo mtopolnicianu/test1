@@ -1,60 +1,51 @@
 package pages;
 
 
-import org.openqa.selenium.JavascriptExecutor;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import java.time.Duration;
+
 
 public class LoaderPage extends BasePage {
 
 
-    @FindBy(xpath = "//a[@href='loader.html']")
-    private WebElement menuButton1;
+    @FindBy(xpath = "//a[@href='#sidebar']")
+    private WebElement menuButton;
 
-    @FindBy(xpath = "//a[@href ='loader.html']")
+    @FindBy(linkText = "LOADER")
     private WebElement loaderPage;
 
 
-    @FindBy(id = "//button[@id=\"loaderBtn\"]")
+    @FindBy(css = "button#loaderBtn")
     private WebElement clickMeButton;
 
     public LoaderPage(WebDriver driver) {
         super(driver);
     }
+    private static final String LOADING_COMPLETED_CONFIRMATION = "And you have clicked the button!";
 
-    public WebElement getClickMeButton() {
-        return clickMeButton;
+    public void clickMenuButton() {
+        waitForElementToBeVisible(menuButton);
+        menuButton.click();
+        System.out.println("Test");
     }
 
-    public WebElement getLoaderPage() {
-        return loaderPage;
-    }
-
-    public WebElement getMenuButton1() {
-        return menuButton1;
-
-    }
-
-    public void clickLoaderPage() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void clickLoaderPage() {
         loaderPage.click();
     }
 
-    public void clickMenuButton() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        menuButton1.click();
-        System.out.println("Test");
+    public void clickTheButton() {
+        waitForElementToBeVisible(clickMeButton);
+        clickMeButton.click();
 
     }
-
-    public void clickTheButton() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].click();", menuButton1);
-
-
+    public void assertLoadingCompleteAppeared(){
+        waitForElementToBeVisible(clickMeButton);
+        String confirmationLoadingComplete = driver.findElement(By.cssSelector("p#p_wording")).getText();
+        Assert.assertEquals("The confirmation message was not displayed!", LOADING_COMPLETED_CONFIRMATION, confirmationLoadingComplete);
     }
+
 
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,11 @@ public class DropDownPage extends BasePage{
 
     @FindBy(xpath = "//a[@href ='dropdown.html']")
     private WebElement dropDownPage;
-    @FindBy(xpath = "//input[@id=\"demo-priority-low\"]")
+
+    @FindBy(xpath = "//div[@id='main']/div[@class='inner']/div[1]//label[.='One']")
     private WebElement radioButtonOne;
-    @FindBy(xpath = "//input[@id=\"demo-priority-normal\"]")
+
+    @FindBy(xpath = "//div[@id='main']/div[@class='inner']/div[1]//label[.='Two']")
     private WebElement radioButtonTwo;
 
     @FindBy(name = "cars")
@@ -27,21 +30,19 @@ public class DropDownPage extends BasePage{
         super(driver);
     }
 
-    public void clickMenuButton() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void clickMenuButton() {
+        waitForElementToBeVisible(menuButton);
         menuButton.click();
         System.out.println("Test");
     }
 
     public void clickDropDownPage() throws InterruptedException {
-        wait.until((ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='#sidebar']"))));
-       // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForElementToBeVisible(dropDownPage);
         dropDownPage.click();
     }
 
     public void selectAnOption() throws InterruptedException {
-        wait.until((ExpectedConditions.visibilityOfElementLocated(By.name("cars"))));
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForElementToBeVisible(menuItem);
         Select select = new Select(menuItem);
         select.selectByValue("honda");
         select.selectByVisibleText("Honda");
@@ -49,21 +50,39 @@ public class DropDownPage extends BasePage{
 
     }
     public void selectRadioButtonOne()  {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForElementToBeVisible(radioButtonOne);
         radioButtonOne.click();
         System.out.println(radioButtonOne.isSelected());
 
-//        radioButtonOne.isDisplayed();
-//        radioButtonOne.isEnabled();
-//        radioButtonOne.isSelected();
-//        radioButtonOne.getText();
-//        System.out.println(radioButtonOne.getText());
+        radioButtonOne.isDisplayed();
+        radioButtonOne.isEnabled();
+        radioButtonOne.isSelected();
+        radioButtonOne.getText();
+        System.out.println(radioButtonOne.getText());
     }
 
-    public void selectRadioButtonTwo() throws Throwable {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void selectRadioButtonTwo() {
+        waitForElementToBeClickable(radioButtonTwo);
         radioButtonTwo.click();
         System.out.println(radioButtonTwo.isSelected());
 
+    }
+
+    public void assertRadioButtonOne(){
+        waitForElementToBeVisible(radioButtonOne);
+        radioButtonOne.click();
+        Assert.assertEquals(true, radioButtonOne.isSelected());
+        System.out.println("Checkbox one is selected - Assert passed");
+    }
+
+    public void assertRadioButtonTwo(){
+        radioButtonTwo.click();
+        waitForElementToBeClickable(radioButtonTwo);
+        Assert.assertEquals(true, radioButtonTwo.isSelected());
+        System.out.println("Checkbox two is selected - Assert passed");
+    }
+    public void assertDropDownMenu(){
+        WebElement menuItemOption = driver.findElement(By.xpath("//select[@id='cars']/option[@value='honda']"));
+        Assert.assertEquals(true, menuItemOption.isSelected() );
     }
 }

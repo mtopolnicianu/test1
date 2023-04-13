@@ -20,7 +20,7 @@ public class DropRadioButtonsPage extends BasePage {
     }
 
     public void selectRadioButtonOne()  {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForElementToBeClickable(radioButtonOne);
         radioButtonOne.click();
         System.out.println(radioButtonOne.isSelected());
 
@@ -31,8 +31,8 @@ public class DropRadioButtonsPage extends BasePage {
 //        System.out.println(radioButtonOne.getText());
     }
 
-    public void selectRadioButtonTwo() throws Throwable {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public void selectRadioButtonTwo() {
+        waitForElementToBeClickable(radioButtonTwo);
         radioButtonTwo.click();
         System.out.println(radioButtonTwo.isSelected());
 
