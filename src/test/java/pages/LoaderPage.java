@@ -32,9 +32,7 @@ public class LoaderPage extends BasePage {
         return loaderPage;
     }
 
-    public WebElement getMenuButton1() {return menuButton1;
-
-    }
+    public WebElement getMenuButton1() {return menuButton1;}
 
     public void clickLoaderPage() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

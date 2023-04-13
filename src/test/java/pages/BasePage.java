@@ -21,9 +21,7 @@ public class BasePage {
         return driver;
     }
 
-    //create two methods for wait until element is visible and clickable
-
-       }
+}
        // new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(By.xpath("//a/h3")));
 
 

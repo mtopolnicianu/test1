@@ -51,8 +51,8 @@ public class HomePage extends BasePage{
         cucumberBDDWithSeleniumJava.click();
     }
 
-    public void clickAccessLink3() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickAccessLink3() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         masteringSelectorsLocators.click();
     }
 

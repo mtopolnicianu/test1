@@ -15,8 +15,10 @@ public class DropDownPage extends BasePage{
 
     @FindBy(xpath = "//a[@href ='dropdown.html']")
     private WebElement dropDownPage;
+
     @FindBy(xpath = "//input[@id=\"demo-priority-low\"]")
     private WebElement radioButtonOne;
+
     @FindBy(xpath = "//input[@id=\"demo-priority-normal\"]")
     private WebElement radioButtonTwo;
 
@@ -27,7 +29,7 @@ public class DropDownPage extends BasePage{
         super(driver);
     }
 
-    public void clickMenuButton() throws InterruptedException {
+    public void clickMenuButton() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         menuButton.click();
         System.out.println("Test");
