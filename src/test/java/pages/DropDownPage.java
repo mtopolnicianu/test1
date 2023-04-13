@@ -60,7 +60,7 @@ public class DropDownPage extends BasePage{
 //        System.out.println(radioButtonOne.getText());
     }
 
-    public void selectRadioButtonTwo() throws Throwable {
+    public void selectRadioButtonTwo() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         radioButtonTwo.click();
         System.out.println(radioButtonTwo.isSelected());

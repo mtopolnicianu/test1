@@ -32,28 +32,26 @@ public class LoaderPage extends BasePage {
         return loaderPage;
     }
 
-    public WebElement getMenuButton1() {
-        return menuButton1;
+    public WebElement getMenuButton1() {return menuButton1;
 
     }
 
-    public void clickLoaderPage() throws InterruptedException {
+    public void clickLoaderPage() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loaderPage.click();
     }
 
-    public void clickMenuButton() throws InterruptedException {
+    public void clickMenuButton()  {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         menuButton1.click();
         System.out.println("Test");
 
     }
 
-    public void clickTheButton() throws InterruptedException {
+    public void clickTheButton() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].click();", menuButton1);
-
 
     }
 

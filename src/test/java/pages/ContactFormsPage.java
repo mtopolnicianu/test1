@@ -6,10 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import utils.Utils;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class ContactFormsPage extends BasePage{
+public class ContactFormsPage extends BasePage {
 
     @FindBy(xpath = "//a[@href='#sidebar']")
     private WebElement menuButton;
@@ -18,7 +19,7 @@ public class ContactFormsPage extends BasePage{
     private WebElement contactForm;
 
     @FindBy(css = "input[name='first_name']")
-    private WebElement  enterName;
+    private WebElement enterName;
 
     @FindBy(css = "input[name='last_name']")
     private WebElement enterLastName;
@@ -36,42 +37,43 @@ public class ContactFormsPage extends BasePage{
         super(driver);
     }
 
-    public void clickMenuButton()  {
+    public void clickMenuButton() {
         menuButton.click();
         System.out.println("Test");
     }
 
-    public void clickContactUsForm() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickContactUsForm() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         contactForm.click();
 
     }
-    public void enterNameField () throws InterruptedException, IOException {
+
+    public void enterNameField() throws IOException {
         Properties prop = Utils.getPropertiesFile();
-        Thread.sleep(3000);
-       enterName.sendKeys(prop.getProperty("firstName"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        enterName.sendKeys(prop.getProperty("firstName"));
     }
 
-    public void enterLastNameField () throws InterruptedException, IOException {
+    public void enterLastNameField() throws IOException {
         Properties prop = Utils.getPropertiesFile();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         enterLastName.sendKeys(prop.getProperty("lastName"));
     }
 
-    public void enterEmailAddressField () throws InterruptedException, IOException {
+    public void enterEmailAddressField() throws IOException {
         Properties prop = Utils.getPropertiesFile();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         enterEmailAddress.sendKeys(prop.getProperty("emailAddress"));
     }
 
-    public void enterCommentsField () throws InterruptedException, IOException {
+    public void enterCommentsField() throws IOException {
         Properties prop = Utils.getPropertiesFile();
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         enterComments.sendKeys(prop.getProperty("comments"));
     }
 
-    public void pressSubmitButton () throws InterruptedException {
-        Thread.sleep(5000);
+    public void pressSubmitButton() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         submitButton.click();
     }
 

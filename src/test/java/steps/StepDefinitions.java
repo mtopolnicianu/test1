@@ -81,9 +81,8 @@ public class StepDefinitions {
     }
 
     @When("^I click the menu button1$")
-    public void menuButton1() throws Throwable {
+    public void menuButton1() throws InterruptedException {
         loaderPage.clickMenuButton();
-        Thread.sleep(6000);
     }
 
     @Then("^I click on the \"Click me\" button on the loader page$")

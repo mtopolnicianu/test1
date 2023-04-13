@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class HomePage extends BasePage{
@@ -29,24 +30,24 @@ public class HomePage extends BasePage{
     }
 
 
-    public void clickMenuButton() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickMenuButton()  {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         menuButton.click();
         System.out.println("Test");
     }
 
-    public void clickHomeButtonMenu() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickHomeButtonMenu()  {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePageButtonMenu.click();
     }
 
-    public void clickAccessLink() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickAccessLink()  {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         seleniumWebdriverJavaLink.click();
     }
 
     public void clickAccessLink2() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         cucumberBDDWithSeleniumJava.click();
     }
 

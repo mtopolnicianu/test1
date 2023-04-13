@@ -39,13 +39,13 @@ public class ButtonsPage extends BasePage {
         System.out.println("Test");
     }
 
-    public void clickLinkButtons() throws Throwable {
+    public void clickLinkButtons() {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='buttons.html'])")));
         buttonLink.click();
 
     }
 
-    public void clickBtnOne() throws Throwable {
+    public void clickBtnOne() {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button#btn_one")));
         buttonOne.click();
     }
