@@ -1,3 +1,4 @@
+@test4
 Feature: Exercises
 
   Scenario: Exercise 1

@@ -1,4 +1,4 @@
-
+@test4
 Feature: Exercises
 
   Scenario: Exercise 1
@@ -21,8 +21,6 @@ Feature: Exercises
     And I click the home page link
     Then I should be redirected to the Selectors/Locator course page
 
- # Scenario: Exercise 4
- #   Given I access the https://www.automationtesting.co.uk page
- #    When I click the menu button
- #   Then I click on the "Click me" button on the loader page
+
+
 

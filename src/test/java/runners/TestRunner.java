@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        tags = "@test and @test1 and @test2 and @test3",
+        tags = "@test2",
         features = {"src/test/resources/features"}, // Path to your feature files
         glue = {"steps"}, // Package where your step definitions are located
         plugin = {"pretty", "html:target/cucumber-reports"} // Plugins for generating reports

@@ -1,6 +1,5 @@
 package pages;
 
-import io.cucumber.core.internal.com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,9 +7,9 @@ import utils.Utils;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
-public class ContactFormsPage {
-    private WebDriver driver;
+public class ContactFormsPage extends BasePage{
 
     @FindBy(xpath = "//a[@href='#sidebar']")
     private WebElement menuButton;
@@ -33,10 +32,11 @@ public class ContactFormsPage {
     @FindBy(css = "input[type='submit']")
     private WebElement submitButton;
 
+    public ContactFormsPage(WebDriver driver) {
+        super(driver);
+    }
 
-
-    public void clickMenuButton() throws InterruptedException {
-        Thread.sleep(5000);
+    public void clickMenuButton()  {
         menuButton.click();
         System.out.println("Test");
     }

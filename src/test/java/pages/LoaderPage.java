@@ -1,16 +1,13 @@
 package pages;
 
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
-public class LoaderPage {
-    private WebDriver driver;
+public class LoaderPage extends BasePage {
 
 
     @FindBy(xpath = "//a[@href='loader.html']")
@@ -23,24 +20,40 @@ public class LoaderPage {
     @FindBy(id = "//button[@id=\"loaderBtn\"]")
     private WebElement clickMeButton;
 
+    public LoaderPage(WebDriver driver) {
+        super(driver);
+    }
+
     public WebElement getClickMeButton() {
         return clickMeButton;
     }
 
+    public WebElement getLoaderPage() {
+        return loaderPage;
+    }
+
+    public WebElement getMenuButton1() {
+        return menuButton1;
+
+    }
+
     public void clickLoaderPage() throws InterruptedException {
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loaderPage.click();
     }
 
     public void clickMenuButton() throws InterruptedException {
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         menuButton1.click();
         System.out.println("Test");
+
     }
 
-    public void clickTheButton() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", clickMeButton);
+    public void clickTheButton() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].click();", menuButton1);
+
 
     }
 
