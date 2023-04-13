@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class RadioButtonsPage {
+import java.time.Duration;
 
-    private WebDriver driver;
+public class DropRadioButtonsPage extends BasePage {
 
 
     @FindBy(xpath = "//input[@id=\"demo-priority-low\"]")
@@ -15,8 +15,12 @@ public class RadioButtonsPage {
     @FindBy(xpath = "//input[@id=\"demo-priority-normal\"]")
     private WebElement radioButtonTwo;
 
-    public void selectRadioButtonOne() throws Throwable {
-        Thread.sleep(3000);
+    public DropRadioButtonsPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void selectRadioButtonOne()  {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         radioButtonOne.click();
         System.out.println(radioButtonOne.isSelected());
 
@@ -28,7 +32,7 @@ public class RadioButtonsPage {
     }
 
     public void selectRadioButtonTwo() throws Throwable {
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         radioButtonTwo.click();
         System.out.println(radioButtonTwo.isSelected());
 

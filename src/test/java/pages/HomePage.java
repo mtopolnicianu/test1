@@ -1,19 +1,13 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class HomePage {
-    private WebDriver driver;
+public class HomePage extends BasePage{
+
 
     @FindBy(xpath = "//a[@href='#sidebar']")
     private WebElement menuButton;
@@ -30,6 +24,9 @@ public class HomePage {
     @FindBy(linkText = ("Mastering Selectors/Locators"))
     private WebElement masteringSelectorsLocators;
 
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public void clickMenuButton() throws InterruptedException {
@@ -48,8 +45,8 @@ public class HomePage {
         seleniumWebdriverJavaLink.click();
     }
 
-    public void clickAccessLink2() throws InterruptedException {
-        Thread.sleep(3000);
+    public void clickAccessLink2() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         cucumberBDDWithSeleniumJava.click();
     }
 

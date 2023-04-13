@@ -23,7 +23,7 @@ public class StepDefinitions {
     private ButtonsPage buttonsPage;
     private ContactFormsPage contactFormsPage;
     private DropDownPage dropDownPage;
-    private RadioButtonsPage radioButtonsPage;
+    private DropRadioButtonsPage dropRadioButtonsPage;
 
     @Before
     public void before() {
@@ -35,9 +35,10 @@ public class StepDefinitions {
         buttonsPage = PageFactory.initElements(driver, ButtonsPage.class);
         contactFormsPage = PageFactory.initElements(driver, ContactFormsPage.class);
         dropDownPage = PageFactory.initElements(driver, DropDownPage.class);
-        radioButtonsPage = PageFactory.initElements(driver, RadioButtonsPage.class);
+        dropRadioButtonsPage = PageFactory.initElements(driver, DropRadioButtonsPage.class);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
+
 
     }
 
@@ -55,10 +56,6 @@ public class StepDefinitions {
     public void clickMenu() throws Throwable {
         homePage.clickMenuButton();
     }
-    @When("^I click the menu button$")
-    public void Menuclicked() throws Throwable {
-        loaderPage.clickMenuButton();
-    }
 
     @And("^I click the home page link$")
     public void gotoPage() throws Throwable {
@@ -74,6 +71,7 @@ public class StepDefinitions {
     @Then("^I should be redirected to the Cucumber BDD with Selenium & Java examples$")
     public void accessLink2() throws Throwable {
         homePage.clickAccessLink2();
+
     }
 
     @Then("^I should be redirected to the Selectors/Locator course page$")
@@ -88,7 +86,7 @@ public class StepDefinitions {
         Thread.sleep(6000);
     }
 
-    @Then("^I click on the \"Click me\" button on the loader page")
+    @Then("^I click on the \"Click me\" button on the loader page$")
     public void clickMeButton() throws Throwable {
         loaderPage.clickTheButton();
 
@@ -162,13 +160,13 @@ public class StepDefinitions {
     @Then("^the user clicked on the \"one\" radio button from Radio Buttons list$")
     public void clickRadioButtonOne() throws Throwable {
         Thread.sleep(3000);
-        radioButtonsPage.selectRadioButtonOne();
+       dropDownPage.selectRadioButtonOne();
     }
 
     @Then("^the user clicked on the \"two\" radio button from Radio Buttons list$")
     public void clickRadioButtonTwo() throws Throwable {
         Thread.sleep(3000);
-        radioButtonsPage.selectRadioButtonTwo();
+        dropDownPage.selectRadioButtonTwo();
     }
 }
 
