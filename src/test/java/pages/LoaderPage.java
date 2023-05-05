@@ -14,12 +14,15 @@ public class LoaderPage extends BasePage {
     @FindBy(xpath = "//a[@href='#sidebar']")
     private WebElement menuButton;
 
-    @FindBy(linkText = "LOADER")
+    @FindBy(xpath = "//a[@href=\"loader.html\"]")
     private WebElement loaderPage;
 
 
-    @FindBy(css = "button#loaderBtn")
+    @FindBy(xpath = "//button[@id=\"loaderBtn\"]")
     private WebElement clickMeButton;
+
+    @FindBy(css = "p#p_wording")
+    private WebElement confirmationLoadingComplete;
 
     public LoaderPage(WebDriver driver) {
         super(driver);
@@ -42,9 +45,7 @@ public class LoaderPage extends BasePage {
 
     }
     public void assertLoadingCompleteAppeared(){
-        waitForElementToBeVisible(clickMeButton);
-        String confirmationLoadingComplete = driver.findElement(By.cssSelector("p#p_wording")).getText();
-        Assert.assertEquals("The confirmation message was not displayed!", LOADING_COMPLETED_CONFIRMATION, confirmationLoadingComplete);
+        Assert.assertTrue("The button was not clicked!",confirmationLoadingComplete.getText().contains("And you have clicked the button!"));
     }
 
 

@@ -28,10 +28,19 @@ public class HomePage extends BasePage {
     @FindBy(linkText = ("Mastering Selectors/Locators"))
     private WebElement masteringSelectorsLocators;
 
+    @FindBy(xpath = "//h1[@class=\"ud-heading-xl clp-lead__title clp-lead__title--small\"]")
+    private WebElement seleniumWebDriverAndJavaLink;
+
+    @FindBy(xpath = "//h1[@class=\"ud-heading-xl clp-lead__title clp-lead__title--small\"]")
+    private WebElement cucumberBddSeleniumJavaCoursePage;
+
+    @FindBy(xpath = "//h1[@class=\"ud-heading-xl clp-lead__title clp-lead__title--small\"]")
+    private WebElement selectorsAndLocatorsPage;
+
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
-
 
     public void clickMenuButton() {
         waitForElementToBeClickable(menuButton);
@@ -55,26 +64,21 @@ public class HomePage extends BasePage {
     }
 
     public void clickAccessLink3() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        waitForElementToBeVisible(masteringSelectorsLocators);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].click();", masteringSelectorsLocators );
-        masteringSelectorsLocators.click();
+        js.executeScript("arguments[0].click()", masteringSelectorsLocators);
     }
 
     public void assertVerifyTheExamplesPage() {
-
-        WebElement seleniumWebDriverAndJavaLink = driver.findElement(By.cssSelector(".ud-main-content-wrapper .header--gap-auth-button--vj50D:nth-child(8) span"));
-        Assert.assertEquals(true, seleniumWebDriverAndJavaLink.isDisplayed());
+        Assert.assertTrue(seleniumWebDriverAndJavaLink.isDisplayed());
     }
 
     public void assertVerifyTheSeleniumCourses() {
-        WebElement cucumberBddSeleniumJavaCoursePage = driver.findElement(By.xpath("//body[@id='udemy']/div[@class='ud-main-content-wrapper']/div[1]//a[@href='https://www.udemy.com/join/signup-popup/?locale=en_US&response_type=html&next=https%3A%2F%2Fwww.udemy.com%2Fcourse%2Fcucumber-bdd-selenium-java-complete-automation-course%2F%3FcouponCode%3D9DCA359EA4A0BC9B7F1F']/span[.='Sign up']"));
-        Assert.assertEquals(true, cucumberBddSeleniumJavaCoursePage.isDisplayed());
+        Assert.assertTrue(cucumberBddSeleniumJavaCoursePage.isDisplayed());
     }
-    public void assertVerifyTheSelectorsLocatorsCourses() {
 
-        WebElement selectorsAndLocatorsPage = driver.findElement(By.cssSelector(".ud-main-content-wrapper nav [class='ud-text-sm header--dropdown-button-text--2OxOV']"));
-        Assert.assertEquals(true, selectorsAndLocatorsPage.isDisplayed());
+    public void assertVerifyTheSelectorsLocatorsCourses() {
+        Assert.assertTrue(selectorsAndLocatorsPage.isDisplayed());
     }
 }
 

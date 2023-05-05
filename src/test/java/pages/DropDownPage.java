@@ -1,13 +1,10 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import java.time.Duration;
 
 public class DropDownPage extends BasePage{
 
@@ -26,6 +23,15 @@ public class DropDownPage extends BasePage{
     @FindBy(name = "cars")
     private WebElement menuItem;
 
+    @FindBy(css = "input#demo-priority-low")
+    private WebElement checkRadioButtonOne;
+
+    @FindBy(css = "input#demo-priority-normal")
+    private WebElement checkRadioButtonTwo;
+
+    @FindBy(xpath = "//select[@id='cars']/option[@value='honda']")
+    private WebElement menuItemOption;
+
     public DropDownPage(WebDriver driver) {
         super(driver);
     }
@@ -36,24 +42,21 @@ public class DropDownPage extends BasePage{
         System.out.println("Test");
     }
 
-    public void clickDropDownPage() throws InterruptedException {
+    public void clickDropDownPage() {
         waitForElementToBeVisible(dropDownPage);
         dropDownPage.click();
     }
 
-    public void selectAnOption() throws InterruptedException {
+    public void selectAnOption(){
         waitForElementToBeVisible(menuItem);
         Select select = new Select(menuItem);
-        select.selectByValue("honda");
         select.selectByVisibleText("Honda");
-
 
     }
     public void selectRadioButtonOne()  {
         waitForElementToBeVisible(radioButtonOne);
         radioButtonOne.click();
         System.out.println(radioButtonOne.isSelected());
-
         radioButtonOne.isDisplayed();
         radioButtonOne.isEnabled();
         radioButtonOne.isSelected();
@@ -69,20 +72,20 @@ public class DropDownPage extends BasePage{
     }
 
     public void assertRadioButtonOne(){
-        waitForElementToBeVisible(radioButtonOne);
         radioButtonOne.click();
-        Assert.assertEquals(true, radioButtonOne.isSelected());
+        waitForElementToBeVisible(radioButtonOne);
+        Assert.assertTrue(checkRadioButtonOne.isSelected());
         System.out.println("Checkbox one is selected - Assert passed");
     }
 
     public void assertRadioButtonTwo(){
         radioButtonTwo.click();
         waitForElementToBeClickable(radioButtonTwo);
-        Assert.assertEquals(true, radioButtonTwo.isSelected());
+        Assert.assertTrue(checkRadioButtonTwo.isSelected());
         System.out.println("Checkbox two is selected - Assert passed");
     }
     public void assertDropDownMenu(){
-        WebElement menuItemOption = driver.findElement(By.xpath("//select[@id='cars']/option[@value='honda']"));
-        Assert.assertEquals(true, menuItemOption.isSelected() );
+        waitForElementToBeVisible(menuItemOption);
+        Assert.assertTrue(menuItemOption.isSelected());
     }
 }

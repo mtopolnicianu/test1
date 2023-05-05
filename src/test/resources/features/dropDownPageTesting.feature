@@ -1,5 +1,5 @@
 @test6
-Feature: Exercises on DropDown page
+Feature: The DropDown page testing
 
   Scenario: The user access the dropDown page from Menu
     Given the user access the https://www.automationtesting.co.uk page

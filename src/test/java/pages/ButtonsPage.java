@@ -49,18 +49,13 @@ public class ButtonsPage extends BasePage {
         buttonOne.click();
     }
 
-    //JavaScriptExecutor click() method
     public void clickBtnTwo() {
         waitForElementToBeClickable(buttonTwo);
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//  js.executeScript("document.getElementById('btn_two').click()", buttonTwo);
-
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].click();", buttonTwo);
 
     }
 
-    //Action Move & Click method
     public void clickBtnThree() {
         waitForElementToBeVisible(buttonThree);
         Actions action = new Actions(getDriver());
@@ -77,18 +72,10 @@ public class ButtonsPage extends BasePage {
         Assert.assertEquals("The confirmation message was not displayed for button two!", SECOND_BUTTON_CONFIRMATION_MESSAGE, confirmationMessageTwo);
     }
 
-    //example based on alert box
     public void assertMessageForButtonOneAppeared() {
-        Alert alertBox = driver.switchTo().alert();
-        System.out.println("Alert Box :" + alertBox);
-        Assert.assertNotNull(alertBox);
-        System.out.println("Alert is displayed");
+        String confirmationMessageOne = getDriver().switchTo().alert().getText();
+        Assert.assertEquals("The confirmation message was not displayed for button one!", FIRST_BUTTON_CONFIRMATION_MESSAGE, confirmationMessageOne);
+
     }
-    //example based on the text in the alert box
-//    public void assertMessageForButtonOneAppeared() {
-//        String confirmationMessageOne = getDriver().switchTo().alert().getText();
-//        Assert.assertEquals("The confirmation message was not displayed for button one!", FIRST_BUTTON_CONFIRMATION_MESSAGE, confirmationMessageOne);
-//
-//    }
 }
 

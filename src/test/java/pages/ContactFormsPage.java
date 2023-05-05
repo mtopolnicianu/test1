@@ -30,6 +30,9 @@ public class ContactFormsPage extends BasePage {
     private WebElement enterComments;
 
     @FindBy(xpath = "//div[@id='main']/div[@class='inner']//h3[.='Thank you for your mail!']")
+    private WebElement submittedButtonConfirmationMessage;
+
+    @FindBy(xpath ="//input[@type=\"submit\"]")
     private WebElement submitButton;
 
     public ContactFormsPage(WebDriver driver) {
@@ -75,6 +78,9 @@ public class ContactFormsPage extends BasePage {
         waitForElementToBeVisible(submitButton);
         submitButton.click();
 
+    }
+    public void assertConfirmationMessageForSubmittedForm (){
+        Assert.assertTrue(submittedButtonConfirmationMessage.isDisplayed());
     }
 
 }

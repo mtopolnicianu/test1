@@ -7,11 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,8 +24,8 @@ public class StepDefinitions {
     private ButtonsPage buttonsPage;
     private ContactFormsPage contactFormsPage;
     private DropDownPage dropDownPage;
-    private DropRadioButtonsPage dropRadioButtonsPage;
     private TestStorePage testStorePage;
+    private AccordionPage accordionPage;
 
     @Before
     public void before() {
@@ -40,8 +37,8 @@ public class StepDefinitions {
         buttonsPage = PageFactory.initElements(driver, ButtonsPage.class);
         contactFormsPage = PageFactory.initElements(driver, ContactFormsPage.class);
         dropDownPage = PageFactory.initElements(driver, DropDownPage.class);
-        dropRadioButtonsPage = PageFactory.initElements(driver, DropRadioButtonsPage.class);
         testStorePage = PageFactory.initElements(driver, TestStorePage.class);
+        accordionPage = PageFactory.initElements(driver, AccordionPage.class);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -55,6 +52,10 @@ public class StepDefinitions {
     @Given("I access the ([^\"]*) page$")
     public void accessPage(String link) {
         driver.get(link);
+    }
+    @Given("the user access the ([^\"]*) link$")
+            public void accessLink(String link){
+    driver.get(link);
     }
 
     @When("^I click the menu button$")
@@ -85,11 +86,12 @@ public class StepDefinitions {
     }
 
     @And("^I select the loader option from menu$")
-    public void clickLoaderPageFromMenu (){
+    public void clickLoaderPageFromMenu() {
         loaderPage.clickLoaderPage();
     }
+
     @Then("^I click the \"Click me\" button$")
-    public void pressClickOnClickMeButton (){
+    public void pressClickOnClickMeButton() {
         loaderPage.clickTheButton();
     }
 
@@ -122,7 +124,7 @@ public class StepDefinitions {
         contactFormsPage.enterCommentsField();
     }
 
-    @Then("^I click Submit the form$")
+    @Then("^I click the Submit button after all fields are completed$")
     public void clickOnSubmitButton() {
         contactFormsPage.pressSubmitButton();
 
@@ -138,7 +140,6 @@ public class StepDefinitions {
         buttonsPage.clickBtnThree();
     }
 
-    //Scenarios for dropDopwn page
     @Given("^the user access the ([^\"]*) page$")
     public void linkMenu(String link) {
         driver.get(link);
@@ -146,12 +147,12 @@ public class StepDefinitions {
     }
 
     @When("^the user clicked on the menu button$")
-    public void clickMenuButton() throws InterruptedException {
+    public void clickMenuButton(){
         dropDownPage.clickDropDownPage();
     }
 
     @Then("^the user can choose one of the option from dropdown list$")
-    public void dropDownList() throws InterruptedException {
+    public void dropDownList() {
         dropDownPage.selectAnOption();
 
     }
@@ -183,8 +184,7 @@ public class StepDefinitions {
 
     @And("^I verify that I am redirected to the confirmation message for submitted form$")
     public void verifyTheSubmittedConfirmationMessage() {
-        WebElement submittedButton = driver.findElement(By.xpath("//div[@id='main']/div[@class='inner']//h3[.='Thank you for your mail!']"));
-        Assert.assertEquals(true, submittedButton.isDisplayed());
+        contactFormsPage.assertConfirmationMessageForSubmittedForm();
 
     }
 
@@ -225,29 +225,43 @@ public class StepDefinitions {
     }
 
     @Then("^I click to the testStore page$")
-    public void testStoreLink() throws InterruptedException {
+    public void testStoreLink() {
         testStorePage.clickTestStorePage();
     }
 
-    @And("^I verify that the testStore page is it opened correctly$")
+    @And("^I verify that the testStore page is opened correctly$")
     public void verifyTestStorePage() {
         testStorePage.assertTestStorePage();
     }
 
-    @And("^I select the hummingbird T-Shirt$")
-    public void tShirtSelected() {
-        testStorePage.selectHummingbirdTshirt();
+    @And("^I select the first item from testStore page with products$")
+    public void firstItemSelected() {
+        testStorePage.selectFirstItemFromProducts();
     }
 
-    @And("^I have added into my cart the t-shirt")
-    public void tShirtAdded() throws InterruptedException {
-        testStorePage.addHummingbirdTshirt();
+    @And("^I have added into my cart the first item from testStore page")
+    public void firstItemAdded() {
+        testStorePage.addFirstItemFromProducts();
     }
 
-    @Then("^I verify the total product$")
-    public void verifyTheTotalPriceFromShoppingCart() throws InterruptedException {
+    @Then("^I verify the successfully added to Cart message for the first item$")
+    public void verifyTheSuccessfullyMessageForTheFirstItemAdded() {
         testStorePage.assertShoppingCartTotal();
     }
+
+    @And("^I select the Accordion option from menu$")
+    public void accordionOptionSelected() {
+        accordionPage.selectAccordionOption();
+
+    }
+
+    @And("^I click on the Platform Portability button from Accordion page$")
+    public void platformPortabilityButtonSelected (){
+        accordionPage.extendedTextBySelectingThePlatformPortabilityOption();
+        accordionPage.closedTextBySelectingThePlatformPortabilityOption();
+    }
+
+
 }
 
 
